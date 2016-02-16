@@ -20,7 +20,7 @@ mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Let the port be reused if no process is actually using it
 mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 # Bind to the address corresponding to the main name of the host
-mySocket.bind((socket.gethostname(), 1235))
+mySocket.bind(('localhost', 1235))
 
 # Queue a maximum of 5 TCP connection requests
 
@@ -37,10 +37,7 @@ try:
         print recvSocket.recv(2048)
         print 'Answering back...'
         recvSocket.send("HTTP/1.1 200 OK\r\n\r\n" +
-                        "<html><body><h1>Hello World!</h1>" +
-                        "<p>And in particular hello to you, " +
-                        str(address[0]) +
-                        "</p>" +
+                        "<html><body><h1>Hola! Eres esta IP(<span>" + address[0] + "</span>) y de este puerto <span>"+ str(address[1]) +"</span></h1>" +
                         "</body></html>" +
                         "\r\n")
         recvSocket.close()
